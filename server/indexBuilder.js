@@ -33,4 +33,8 @@ function parse_list(currency_list, cache_list) {
     }
 }
 
-setInterval(parse_list(country_data.currency_list, check_list), hour/2);
+parse_list(country_data.currency_list, check_list);
+setInterval(function () {
+        parse_list(country_data.currency_list, check_list);
+    }, 
+hour/2);
