@@ -10,8 +10,7 @@ var conversions = []
 webServer.createServer(function (request, response) {
     var conversion_obj = []
     var request_data = url.parse(request.url, true);
-    var query = request_data.query;
-    var country_abbrev = country_to_abbrev(query.base, country_data.currency_list);
+    var country_abbrev = request_data.query.base;
     client.keys(country_abbrev + "*", function (error, replies) {
         replies.forEach (function (keyVal) {
             client.get(keyVal.toString(), function (err, reply) {
@@ -29,11 +28,3 @@ webServer.createServer(function (request, response) {
     response.write(JSON.stringify(conversion_obj));
     response.end();
 }).listen(listenPort);
-
-function country_to_abbrev (country, country_list) {
-    for (var i = 0; i < country_list.length; i++) {
-        if (country_list[i].name === country) {
-            return country_list[i].currency.split(",")[0];
-        }
-    }
-}

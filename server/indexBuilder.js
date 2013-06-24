@@ -23,7 +23,7 @@ function parse_list(currency_list, cache_list) {
                                     "from": data.from,
                                     "to": data.to,
                                 };
-                                client.set(data.from + data.to, JSON.stringify(currency_object));
+                                client.set(data.from + ':' + data.to, JSON.stringify(currency_object));
                             }
                         });
                     }
